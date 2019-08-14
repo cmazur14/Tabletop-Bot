@@ -1,9 +1,8 @@
 package com.thegingerbeardd.ttbot.character.fifthedition;
 
-import com.thegingerbeardd.ttbot.character.fifthedition.FifthEditionCharacter;
 import com.thegingerbeardd.ttbot.dice.Die;
 import com.thegingerbeardd.ttbot.dice.Roll;
-import com.thegingerbeardd.ttbot.dice.impl.BasicRoll;
+import com.thegingerbeardd.ttbot.dice.impl.SingleDiceTypeRoll;
 import com.thegingerbeardd.ttbot.rulesets.fifthedition.AbilityScore;
 
 public class FifthEditionCharacterInterface {
@@ -17,7 +16,7 @@ public class FifthEditionCharacterInterface {
     }
 
     public Roll rollAbilityCheck(AbilityScore score) {
-        Roll roll = new BasicRoll(die.getMaxRoll());
+        Roll roll = new SingleDiceTypeRoll(die.getMaxRoll());
         roll.addDiceValue(die.roll());
         roll.addModifier(ownerCharacter.getAbilityScores().getAbilityModifier(score));
         return roll;
