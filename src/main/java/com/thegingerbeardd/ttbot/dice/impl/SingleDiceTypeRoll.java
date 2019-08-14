@@ -62,19 +62,7 @@ public class SingleDiceTypeRoll implements Roll {
         int index = 0;
         for (int i : diceRolls) {
             output.append(DICE_LEFT_BRACKET);
-            if (i == maxVal) {
-                output.append("'''");
-                output.append("CSS\n");
-                output.append(i);
-                output.append("\n'''");
-            } else if (i == 1) {
-                output.append("'''");
-                output.append("diff\n");
-                output.append(i);
-                output.append("\n'''");
-            } else {
-                output.append(i);
-            }
+            output.append(i);
             output.append(DICE_RIGHT_BRACKET);
             if (index < (diceRolls.size() - 1))
                 output.append(" + ");
