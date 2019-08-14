@@ -15,11 +15,18 @@ public class FifthEditionCharacterInterface {
         die = gameBaseDie;
     }
 
+    protected FifthEditionCharacterInterface(FifthEditionCharacter character) {
+        ownerCharacter = character;
+    }
+
+    protected void setGameDie(Die gameDie) {
+        die = gameDie;
+    }
+
     public Roll rollAbilityCheck(AbilityScore score) {
         Roll roll = new SingleDiceTypeRoll(die.getMaxRoll());
         roll.addDiceValue(die.roll());
         roll.addModifier(ownerCharacter.getAbilityScores().getAbilityModifier(score));
         return roll;
     }
-
 }

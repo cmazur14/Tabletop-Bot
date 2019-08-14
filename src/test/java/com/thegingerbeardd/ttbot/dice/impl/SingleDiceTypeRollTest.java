@@ -10,14 +10,14 @@ public class SingleDiceTypeRollTest {
     
     @Test
     public void singleRollProducesCorrectValue() {
-        Roll roll = new SingleDiceTypeRoll(20);
+        Roll roll = new SingleDiceTypeRoll(diceMaxValue(20));
         roll.addDiceValue(10);
         assertThat("Dice that always rolls a 10 should be detected as having rolled a 10", roll.getTotal(), is(10));
     }
 
     @Test
     public void multipleRollsProduceCorrectValue() {
-        Roll roll = new SingleDiceTypeRoll(20);
+        Roll roll = new SingleDiceTypeRoll(diceMaxValue(20));
         roll.addDiceValue(10);
         roll.addDiceValue(10);
         roll.addDiceValue(10);
@@ -26,7 +26,7 @@ public class SingleDiceTypeRollTest {
 
     @Test
     public void multipleModifiersWithNoDiceRollStillProducesAValue() {
-        Roll roll = new SingleDiceTypeRoll(20);
+        Roll roll = new SingleDiceTypeRoll(diceMaxValue(20));
         roll.addModifier(1);
         roll.addModifier(2);
         roll.addModifier(3);
@@ -35,7 +35,7 @@ public class SingleDiceTypeRollTest {
 
     @Test
     public void multipleRollsWithMultipleModifiersWorksCorrectly() {
-        Roll roll = new SingleDiceTypeRoll(20);
+        Roll roll = new SingleDiceTypeRoll(diceMaxValue(20));
         roll.addModifier(1);
         roll.addModifier(2);
         roll.addModifier(3);
@@ -47,11 +47,15 @@ public class SingleDiceTypeRollTest {
 
     @Test
     public void rollToStringWorksAsIntendedWhenThereAreNoSpecialValues() {
-        Roll roll = new SingleDiceTypeRoll(20);
+        Roll roll = new SingleDiceTypeRoll(diceMaxValue(20));
         roll.addDiceValue(10);
         roll.addDiceValue(10);
         roll.addModifier(2);
         assertThat("Output should be of the form: [dice] + modifier", roll.toString(), is("[10] + [10] + 2"));
+    }
+
+    private int diceMaxValue(int val) {
+        return val;
     }
 
     /*@Test
@@ -76,7 +80,7 @@ public class SingleDiceTypeRollTest {
         roll.addDiceValue(3);
         roll.addModifier(1);
         assertThat("Output should be several lines, including extras for discord color", roll.toString(), is(
-                "[```diff\n1\n```] + [```CSS\n20\n```] + [3] + 1"
+                "[```diff\n1\n```] + [```CSS\ndiceMaxValue(20\n```] + [3] + 1"
         ));
     }*/
 
