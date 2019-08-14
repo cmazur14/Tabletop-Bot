@@ -51,7 +51,12 @@ public class SingleDiceTypeRollTest {
         roll.addDiceValue(10);
         roll.addDiceValue(10);
         roll.addModifier(2);
-        assertThat("Output should be of the form: [dice] + modifier", roll.toString(), is("[10] + [10] + 2"));
+        roll.addModifier(5);
+        assertThat("Output should be of the form: [dice] + [dice] + modifier + modifier", roll.toString(), is("[10] + [10] + 2 + 5"));
+        roll = new SingleDiceTypeRoll(diceMaxValue(20));
+        roll.addDiceValue(6);
+        roll.addDiceValue(7);
+        assertThat("Output should be of the form: [dice] + [dice]", roll.toString(), is("[6] + [7]"));
     }
 
     private int diceMaxValue(int val) {

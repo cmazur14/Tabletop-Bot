@@ -8,7 +8,7 @@ public class FifthEditionCharacter {
 
     private FifthEditionCharacterAbilityScores abilityScores;
     private FifthEditionCharacterInterface itrface;
-    private String name;
+    protected String name;
     protected FifthEditionCharacterAbilityScores getAbilityScores() {
         return abilityScores;
     }

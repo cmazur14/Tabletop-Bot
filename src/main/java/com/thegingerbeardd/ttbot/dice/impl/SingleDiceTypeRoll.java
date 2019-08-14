@@ -29,24 +29,6 @@ public class SingleDiceTypeRoll implements Roll {
     }
 
     @Override
-    public int[] getModifiers() {
-        int[] toReturn = new int[modifiers.size()];
-        int index = 0;
-        for (int val : modifiers)
-            toReturn[index] = val;
-        return toReturn;
-    }
-
-    @Override
-    public int[] getDiceValues() {
-        int[] toReturn = new int[diceRolls.size()];
-        int index = 0;
-        for (int val : diceRolls)
-            toReturn[index] = val;
-        return toReturn;
-    }
-
-    @Override
     public int getTotal() {
         int total = 0;
         for (int i : diceRolls)
@@ -75,6 +57,7 @@ public class SingleDiceTypeRoll implements Roll {
             output.append(i);
             if (index < (modifiers.size() - 1))
                 output.append(" + ");
+            index++;
         }
         return output.toString();
     }
