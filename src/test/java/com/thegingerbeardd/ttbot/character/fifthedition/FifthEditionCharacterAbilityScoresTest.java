@@ -1,7 +1,6 @@
-package com.thegingerbeardd.ttbot.character.fifthedition.internals;
+package com.thegingerbeardd.ttbot.character.fifthedition;
 
 import com.thegingerbeardd.ttbot.rulesets.fifthedition.AbilityScore;
-import com.thegingerbeardd.ttbot.rulesets.fifthedition.FifthEditionConstants;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 import org.junit.Test;

@@ -1,4 +1,4 @@
-package com.thegingerbeardd.ttbot.character.fifthedition.internals;
+package com.thegingerbeardd.ttbot.character.fifthedition;
 
 import com.thegingerbeardd.ttbot.rulesets.fifthedition.AbilityScore;
 import com.thegingerbeardd.ttbot.rulesets.fifthedition.FifthEditionConstants;
@@ -40,7 +40,7 @@ public class FifthEditionCharacterAbilityScores {
         scores.put(score, i);
     }
 
-    public Object getAbilityModifier(AbilityScore score) {
+    public int getAbilityModifier(AbilityScore score) {
         if (scores.get(score) < 10)
             return ((scores.get(score) - 11) / 2);
         return ((scores.get(score) - 10) / 2);
