@@ -10,10 +10,8 @@ import static com.thegingerbeardd.ttbot.dice.DiceConstants.*;
 public class SingleDiceTypeRoll implements Roll {
     private List<Integer> diceRolls;
     private List<Integer> modifiers;
-    private int maxVal;
 
-    public SingleDiceTypeRoll(int dieMaxValue) {
-        maxVal = dieMaxValue;
+    public SingleDiceTypeRoll() {
         diceRolls = new ArrayList<>();
         modifiers = new ArrayList<>();
     }
@@ -51,7 +49,7 @@ public class SingleDiceTypeRoll implements Roll {
             index++;
         }
         index = 0;
-        if (modifiers.size() > 0)
+        if (!modifiers.isEmpty())
             output.append(" + ");
         for (int i : modifiers) {
             output.append(i);

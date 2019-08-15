@@ -10,14 +10,14 @@ public class SingleDiceTypeRollTest {
     
     @Test
     public void singleRollProducesCorrectValue() {
-        Roll roll = new SingleDiceTypeRoll(diceMaxValue(20));
+        Roll roll = new SingleDiceTypeRoll();
         roll.addDiceValue(10);
         assertThat("Dice that always rolls a 10 should be detected as having rolled a 10", roll.getTotal(), is(10));
     }
 
     @Test
     public void multipleRollsProduceCorrectValue() {
-        Roll roll = new SingleDiceTypeRoll(diceMaxValue(20));
+        Roll roll = new SingleDiceTypeRoll();
         roll.addDiceValue(10);
         roll.addDiceValue(10);
         roll.addDiceValue(10);
@@ -26,7 +26,7 @@ public class SingleDiceTypeRollTest {
 
     @Test
     public void multipleModifiersWithNoDiceRollStillProducesAValue() {
-        Roll roll = new SingleDiceTypeRoll(diceMaxValue(20));
+        Roll roll = new SingleDiceTypeRoll();
         roll.addModifier(1);
         roll.addModifier(2);
         roll.addModifier(3);
@@ -35,7 +35,7 @@ public class SingleDiceTypeRollTest {
 
     @Test
     public void multipleRollsWithMultipleModifiersWorksCorrectly() {
-        Roll roll = new SingleDiceTypeRoll(diceMaxValue(20));
+        Roll roll = new SingleDiceTypeRoll();
         roll.addModifier(1);
         roll.addModifier(2);
         roll.addModifier(3);
@@ -47,13 +47,13 @@ public class SingleDiceTypeRollTest {
 
     @Test
     public void rollToStringWorksAsIntendedWhenThereAreNoSpecialValues() {
-        Roll roll = new SingleDiceTypeRoll(diceMaxValue(20));
+        Roll roll = new SingleDiceTypeRoll();
         roll.addDiceValue(10);
         roll.addDiceValue(10);
         roll.addModifier(2);
         roll.addModifier(5);
         assertThat("Output should be of the form: [dice] + [dice] + modifier + modifier", roll.toString(), is("[10] + [10] + 2 + 5"));
-        roll = new SingleDiceTypeRoll(diceMaxValue(20));
+        roll = new SingleDiceTypeRoll();
         roll.addDiceValue(6);
         roll.addDiceValue(7);
         assertThat("Output should be of the form: [dice] + [dice]", roll.toString(), is("[6] + [7]"));

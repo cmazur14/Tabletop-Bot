@@ -1,7 +1,6 @@
 package com.thegingerbeardd.ttbot.character.fifthedition;
 
 import com.thegingerbeardd.ttbot.rulesets.fifthedition.AbilityScore;
-import com.thegingerbeardd.ttbot.rulesets.fifthedition.FifthEditionConstants;
 
 import java.util.EnumMap;
 import java.util.Map;
@@ -26,11 +25,11 @@ public class FifthEditionCharacterAbilityScores {
     @Override
     public String toString() {
         StringBuilder builder = new StringBuilder();
-        for (AbilityScore score : scores.keySet()) {
-            builder.append(score);
+        for (Map.Entry<AbilityScore, Integer> score : scores.entrySet()) {
+            builder.append(score.getKey());
             builder.append(": ");
-            builder.append(scores.get(score));
-            if (score.ordinal() != scores.keySet().size() - 1)
+            builder.append(score.getValue());
+            if (score.getKey().ordinal() != scores.keySet().size() - 1)
                 builder.append("\n");
         }
         return builder.toString();
@@ -44,5 +43,22 @@ public class FifthEditionCharacterAbilityScores {
         if (scores.get(score) < 10)
             return ((scores.get(score) - 11) / 2);
         return ((scores.get(score) - 10) / 2);
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (!(obj instanceof FifthEditionCharacterAbilityScores))
+            return false;
+        for (Map.Entry<AbilityScore, Integer> score : scores.entrySet()) {
+            //if any ability score does not match the corresponding ability score in obj, return false
+            if (!score.getValue().equals(((FifthEditionCharacterAbilityScores) obj).scores.get(score.getKey())))
+                return false;
+        }
+        return true;
+    }
+
+    @Override
+    public int hashCode() {
+        return super.hashCode();
     }
 }

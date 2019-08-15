@@ -1,10 +1,13 @@
 package com.thegingerbeardd.ttbot.character.fifthedition;
 
+import com.thegingerbeardd.ttbot.dice.Die;
 import com.thegingerbeardd.ttbot.dice.impl.D20;
 import com.thegingerbeardd.ttbot.rulesets.fifthedition.AbilityScore;
 import org.junit.Test;
 
+import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.CoreMatchers.is;
+import static org.hamcrest.CoreMatchers.not;
 import static org.hamcrest.MatcherAssert.assertThat;
 
 public class FifthEditionCharacterInterfaceTest {
@@ -29,12 +32,32 @@ public class FifthEditionCharacterInterfaceTest {
         protected FifthEditionCharacterAbilityScores getAbilityScores() {
             return new MockedAbilityScores();
         }
+
+        @Override
+        public boolean equals(Object o) {
+            if (!(o instanceof MockedFifthEditionCharacter))
+                return false;
+            return ((MockedFifthEditionCharacter) o).getAbilityScores().equals(getAbilityScores());
+        }
     }
 
     private class MockedDie extends D20 {
         @Override
         public int roll() {
             return 16;
+        }
+    }
+
+    private class DifferentMockedDie implements Die {
+
+        @Override
+        public int roll() {
+            return 2;
+        }
+
+        @Override
+        public int getMaxRoll() {
+            return 3;
         }
     }
 
@@ -48,4 +71,18 @@ public class FifthEditionCharacterInterfaceTest {
         assertThat( AbilityScore.WIS + " ability check is " + (18), itrface.rollAbilityCheck(AbilityScore.WIS).getTotal(), is(18));
         assertThat( AbilityScore.CHA + " ability check is " + (19), itrface.rollAbilityCheck(AbilityScore.CHA).getTotal(), is(19));
     }
+
+    @Test
+    public void overriddenEqualsAndHashCodeWorkCorrectly() {
+        FifthEditionCharacterInterface itrface1 = new FifthEditionCharacterInterface(new MockedFifthEditionCharacter(), new MockedDie());
+        FifthEditionCharacterInterface itrface2 = new FifthEditionCharacterInterface(new MockedFifthEditionCharacter(), new MockedDie());
+        FifthEditionCharacterInterface itrface3 = new FifthEditionCharacterInterface(new MockedFifthEditionCharacter(), new DifferentMockedDie());
+        assertThat("The same interface is equal to itself", itrface1, is(equalTo(itrface1)));
+        assertThat("Two interfaces created with same arguments are equal", itrface1, is(equalTo(itrface2)));
+        assertThat("Two interfaces created with different arguments are not equal", itrface1, is(not(equalTo(itrface3))));
+        assertThat("An interface is not equal to any old thing", itrface3, is(not(equalTo(null))));
+        assertThat("An interface hashes to itself", itrface1.hashCode(), is(equalTo(itrface1.hashCode())));
+        assertThat("Two separate interfaces hash to different values", itrface1.hashCode(), is(not(equalTo(itrface2.hashCode()))));
+    }
+
 }

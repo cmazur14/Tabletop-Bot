@@ -24,9 +24,22 @@ public class FifthEditionCharacterInterface {
     }
 
     public Roll rollAbilityCheck(AbilityScore score) {
-        Roll roll = new SingleDiceTypeRoll(die.getMaxRoll());
+        Roll roll = new SingleDiceTypeRoll();
         roll.addDiceValue(die.roll());
         roll.addModifier(ownerCharacter.getAbilityScores().getAbilityModifier(score));
         return roll;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (!(obj instanceof FifthEditionCharacterInterface))
+            return false;
+        return this.ownerCharacter.equals(((FifthEditionCharacterInterface) obj).ownerCharacter) &&
+                this.die.equals(((FifthEditionCharacterInterface) obj).die);
+    }
+
+    @Override
+    public int hashCode() {
+        return super.hashCode();
     }
 }

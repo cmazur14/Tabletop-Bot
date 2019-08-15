@@ -2,16 +2,13 @@ package com.thegingerbeardd.ttbot.character.fifthedition;
 
 import com.thegingerbeardd.ttbot.dice.Die;
 import com.thegingerbeardd.ttbot.dice.impl.D20;
-import com.thegingerbeardd.ttbot.rulesets.fifthedition.AbilityScore;
 
-public class FifthEditionCharacter {
+public class FifthEditionCharacter extends com.thegingerbeardd.ttbot.character.PlayerCharacter {
 
     private FifthEditionCharacterAbilityScores abilityScores;
     private FifthEditionCharacterInterface itrface;
-    protected String name;
-    protected FifthEditionCharacterAbilityScores getAbilityScores() {
-        return abilityScores;
-    }
+
+    protected FifthEditionCharacter() {}
 
     private FifthEditionCharacter(FifthEditionCharacterBuilder builder) {
         itrface = new FifthEditionCharacterInterface(this);
@@ -20,29 +17,35 @@ public class FifthEditionCharacter {
         name = builder.name;
     }
 
-    protected FifthEditionCharacter() {};
+    protected FifthEditionCharacterAbilityScores getAbilityScores() {
+        return abilityScores;
+    }
 
     public FifthEditionCharacterInterface getInterface() {
         return itrface;
     }
 
-    public String getName() {
-        return name;
+    @Override
+    public boolean equals(Object o) {
+        if (!(o instanceof FifthEditionCharacter))
+            return false;
+        return this.name.equals(((FifthEditionCharacter) o).name) &&
+                this.abilityScores.equals(((FifthEditionCharacter) o).abilityScores);
+    }
+
+    @Override
+    public int hashCode() {
+        return super.hashCode();
     }
 
     public static class FifthEditionCharacterBuilder {
 
-        private static FifthEditionCharacterAbilityScores scores = new FifthEditionCharacterAbilityScores();
-        private static String name = "CharacterName";
-        private static Die gameBaseDie = new D20();
+        private FifthEditionCharacterAbilityScores scores = new FifthEditionCharacterAbilityScores();
+        private String name = "CharacterName";
+        private Die gameBaseDie = new D20();
 
         public FifthEditionCharacterBuilder setAbilityScores(FifthEditionCharacterAbilityScores scores) {
             this.scores = scores;
-            return this;
-        }
-
-        public FifthEditionCharacterBuilder setGameDie(Die die) {
-            this.gameBaseDie = die;
             return this;
         }
 

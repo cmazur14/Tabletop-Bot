@@ -23,4 +23,10 @@ public class D20 implements Die {
         return MAX_VALUE;
     }
 
+    @Override
+    public boolean equals(Object obj) {
+        if (!(obj instanceof D20))
+            return false;
+        return true;
+    }
 }
